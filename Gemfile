@@ -29,6 +29,8 @@ group :production do
   gem "pg"
 end
 
+gem 'rack-ssl', :require => 'rack/ssl'
+
 # gem 'json'
 
 # Gems used only for assets and not required
