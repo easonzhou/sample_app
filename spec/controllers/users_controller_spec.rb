@@ -147,7 +147,7 @@ describe UsersController do
       it "should have a link to change the Gravatar" do
         get :edit, :id => @user
         gravatar_url = "http://gravatar.com/emails"
-        response.should have_selector("a", :href=>gravatar_url, :content=>"change")
+        response.should have_selector("a", :href=>gravatar_url, :content=>"Change")
       end
     end
 
@@ -284,8 +284,8 @@ describe UsersController do
               get :index
               response.should have_selector("div.pagination")
               response.should have_selector("span.disabled", :content => "Previous")
-              response.should have_selector("a", :href => "/users?page=2", :content => "2")
-              response.should have_selector("a", :href => "/users?page=2", :content => "Next")
+              response.should have_selector("a", :content => "2")
+              response.should have_selector("a", :content => "Next")
             end
           end
         end
@@ -314,14 +314,25 @@ describe UsersController do
            describe "as an admin user" do
 
              before(:each) do
-               admin = Factory(:user, :email => "admin@example.com", :admin => true)
-               test_sign_in(admin)
+               @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+               test_sign_in(@admin)
+             end
+             
+             it "should have a delete button" do
+               get :index
+               response.should have_selector("a", :content => "delete")
              end
 
              it "should destroy the user" do
                lambda do
                  delete :destroy, :id => @user
                end.should change(User, :count).by(-1)
+             end
+             
+             it "should not destroy themselves" do
+               lambda do
+                 delete :destroy, :id => @admin
+               end.should_not change(User, :count)
              end
 
              it "should redirect to the users page" do
