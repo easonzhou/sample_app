@@ -7,4 +7,7 @@ class Micropost < ActiveRecord::Base
   validates :user_id, :presence => true
   
   default_scope :order => 'microposts.created_at DESC'
+  
+  MAX_CHARS = 140
+  validates_length_of   :content, :maximum => MAX_CHARS
 end

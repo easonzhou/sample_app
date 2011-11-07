@@ -63,10 +63,26 @@ describe "LayoutLinks" do
       response.should have_selector("a", :href => signout_path,
                                          :content => "Sign out")
     end
-
+    
     it "should have a profile link" do
       visit root_path
-      response.should have_selector("a", :href => user_path(@user), :content => "Profile")
+      response.should have_selector("td", :class => "sidebar round")
     end
-  end
+
+    it "should have one micropost" do
+      visit root_path
+      fill_in :micropost_content, :with => "lalala"
+      click_button
+      response.should have_selector("span.microposts", :content => "1 micropost")
+    end
+
+    it "should have two microposts" do
+      visit root_path
+      fill_in :micropost_content, :with => "lalala"
+      click_button
+      fill_in :micropost_content, :with => "lalala"
+      click_button
+      response.should have_selector("span.microposts", :content => "2 microposts")
+    end
+  end   
 end
