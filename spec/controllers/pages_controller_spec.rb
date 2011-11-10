@@ -35,6 +35,14 @@ describe PagesController do
       response.should have_selector("a", :href => following_user_path(@user), :content => "0 following")
       response.should have_selector("a", :href => followers_user_path(@user), :content => "1 follower")
     end
+    
+    it "should not have a delete button on others' microposts" do
+      @other_user = Factory(:user, :email => Factory.next(:email))
+      @user.follow!(@other_user)
+      @mps = Factory(:micropost, :user => @other_user, :content => "other user's micropost")
+      get 'home'
+      response.should_not have_selector("a", :content => "delete")
+    end
   end
 
   describe "GET 'contact'" do

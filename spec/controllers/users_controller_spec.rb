@@ -72,6 +72,19 @@ describe UsersController do
       response.should have_selector("span.content", :content => mp1.content)
       response.should have_selector("span.content", :content => mp2.content)
     end
+    
+    it "should paginate microposts" do
+      mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
+      mp2 = Factory(:micropost, :user => @user, :content => "Baz quux")
+      30.times do
+        mps = Factory(:micropost, :user => @user, :content => "microposts")
+      end
+      get :show, :id => @user
+      response.should have_selector("div.pagination")
+      response.should have_selector("span.disabled", :content => "Previous")
+      response.should have_selector("a", :content => "2")
+      response.should have_selector("a", :content => "Next")
+    end
   end
 
   describe "POST 'create'" do
