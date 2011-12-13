@@ -85,6 +85,14 @@ describe UsersController do
       response.should have_selector("a", :content => "2")
       response.should have_selector("a", :content => "Next")
     end
+    
+    it "should have the right side bar" do
+      mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
+      get :show, :id => @user
+      response.should have_selector("td.sidebar", :content => "Name")
+      response.should have_selector("td.sidebar", :content => "URL")
+      response.should have_selector("td.sidebar", :content => "Microposts 1")
+    end
   end
 
   describe "POST 'create'" do

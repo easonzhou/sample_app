@@ -196,6 +196,19 @@ describe User do
       @user = User.create!(@attr)
       @followed = Factory(:user)
     end
+    
+    it "should destroy the relationship" do
+      @user.follow!(@followed)
+      @user.destroy
+      @user.should_not be_following(@followed)
+    end
+    
+    it "should destroy the reverse relationship" do
+      @user.follow!(@followed)
+      @user.destroy
+      @followed.followers.should_not include(@user)
+     # @user.should_not be_in @followed.followers
+    end
 
     it "should have a relationships method" do
       @user.should respond_to(:relationships)
