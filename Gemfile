@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.0'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.9'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -23,7 +23,7 @@ group:test do
   	gem 'autotest-rails-pure', '4.1.2'
   	gem 'autotest-fsevent', '0.2.4'
   	gem 'autotest-growl', '0.2.9'
-	gem 'factory_girl_rails', '1.0'
+	gem 'factory_girl_rails', '1.0.1'
 end
 
 group :production do
@@ -40,7 +40,7 @@ gem 'rack-ssl', :require => 'rack/ssl'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
+  gem 'sass-rails', '~> 6.0.0'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
 end
