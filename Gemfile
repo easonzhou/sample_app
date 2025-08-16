@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.0'
+gem 'rails', '~> 7.1.5', '>= 7.1.5.2'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -23,7 +23,7 @@ group:test do
   	gem 'autotest-rails-pure', '4.1.2'
   	gem 'autotest-fsevent', '0.2.4'
   	gem 'autotest-growl', '0.2.9'
-	gem 'factory_girl_rails', '1.0'
+	gem 'factory_girl_rails', '1.0.1'
 end
 
 group :production do
